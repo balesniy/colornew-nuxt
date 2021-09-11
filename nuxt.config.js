@@ -13,12 +13,38 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://unpkg.com/swiper/swiper-bundle.min.css'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css'
+      }
+    ],
+    script: [
+      {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+      },
+      {
+        src: 'https://unpkg.com/swiper/swiper-bundle.min.js',
+        body: true
+      },
+      {
+        src: 'https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js',
+        body: true
+      },
+      {
+        src: 'https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js',
+        body: true
+      }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/sass/style.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -31,7 +57,8 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/svg-sprite'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -49,6 +76,9 @@ export default {
   content: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
+  build: {},
+
+  svgSprite: {
+    elementClass: null
   }
 }

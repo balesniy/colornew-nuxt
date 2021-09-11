@@ -1,0 +1,43 @@
+.link {
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	transition: 0.3s ease-in-out;
+
+	&__text {
+		display: block;
+		position: relative;
+
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			background: $white;
+			transition: 0.3s ease-in-out;
+			height: 1px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 0;
+		}
+	}
+
+	&__icon {
+		display: block;
+		width: 18px;
+		min-width: 18px;
+		height: 18px;
+		margin-left: 10px;
+	}
+
+	&:hover {
+		color: $white;	
+	}
+
+	&_underline:hover {
+		.link__text {
+			&::after {
+				width: 100%;
+			}
+		}
+	}	
+}
