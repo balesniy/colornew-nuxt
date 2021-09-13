@@ -41,7 +41,7 @@
         <ul class="main-menu__list">
           <li v-for="page in pages" :key="page.title" class="main-menu__item">
             <NuxtLink
-              :to="page.url"
+              :to="localePath(page.url)"
               exact
               class="main-menu__link"
             >

@@ -68,7 +68,7 @@
               class="g-col g-col_33 g-col_t-50 g-col_s-100 js-sorting-item vacancies-list__item"
               :class="vacancy.projects.concat(vacancy.technologies).join(' ')"
             >
-              <NuxtLink :to="vacancy.slug" class="vacancy">
+              <NuxtLink :to="vacancy.slug" append class="vacancy">
                 <span class="vacancy__arrow">
                   <svg-icon name="sp-arrow-up-right" />
                 </span>
@@ -109,8 +109,8 @@
 </template>
 <script>
 export default {
-  async asyncData ({ $content, error }) {
-    const vacancies = await $content('vacancies').fetch().catch(() => {
+  async asyncData ({ $content, i18n, error }) {
+    const vacancies = await $content('vacancies', i18n.locale).fetch().catch(() => {
       error({ statusCode: 404, message: 'Page not found' })
     })
 

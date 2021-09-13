@@ -48,7 +48,7 @@
                   <div class="g-row g-row_middle g-row_between">
                     <div v-for="tag in project.tags" :key="tag" class="g-col">
                       <NuxtLink
-                        :to="`/portfolio/?tag=${tag.toLowerCase()}`"
+                        :to="localePath(`/portfolio/?tag=${tag.toLowerCase()}`)"
                         class="link link_underline-hover text-grey"
                       >
                         <span class="link__text">#{{ tag }}</span>
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="g-col">
-                  <NuxtLink to="/portfolio/" class="link link_underline">
+                  <NuxtLink :to="localePath('/portfolio/')" class="link link_underline">
                     <span class="link__text">see more</span>
                     <span class="link__icon">
                       <svg-icon name="sp-chevron-right" />
@@ -83,7 +83,7 @@ export default {
     }
   },
   async fetch () {
-    const projects = await this.$content('portfolio').fetch()
+    const projects = await this.$content('portfolio', this.$i18n.locale).fetch()
     this.projects = projects.map(project => ({ ...project, tags: [...project.technologies, ...project.projects] }))
   },
   mounted () {
@@ -111,7 +111,6 @@ export default {
   },
   methods: {
     getImgSrc (img) {
-      // return ''
       return require(`~/assets/img/${img}`)
     }
   }

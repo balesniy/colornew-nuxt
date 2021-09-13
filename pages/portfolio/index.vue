@@ -165,8 +165,8 @@
 
 <script>
 export default {
-  async asyncData ({ $content, error }) {
-    const projects = await $content('portfolio').fetch().catch(() => {
+  async asyncData ({ $content, i18n, error }) {
+    const projects = await $content('portfolio', i18n.locale).fetch().catch(() => {
       error({ statusCode: 404, message: 'Page not found' })
     })
 

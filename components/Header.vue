@@ -26,7 +26,9 @@
               <div class="lang js-dropdown">
                 <div class="lang__top js-dropdown-button">
                   <div class="lang__text">
-                    Eng
+                    <nuxt-link :to="switchLocalePath('en')">
+                      Eng
+                    </nuxt-link>
                   </div>
                   <div class="lang__icon icon">
                     <svg-icon name="sp-arrow-down" />
@@ -34,7 +36,9 @@
                 </div>
 
                 <div class="lang__dropdown js-dropdown-block">
-                  <a href="#">Rus</a>
+                  <nuxt-link :to="switchLocalePath('ru')">
+                    Rus
+                  </nuxt-link>
                 </div>
               </div><!-- /lang -->
             </div>

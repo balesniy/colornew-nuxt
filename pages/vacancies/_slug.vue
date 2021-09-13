@@ -77,7 +77,7 @@ export default {
   async asyncData (context) {
     const { slug } = context.params
     try {
-      const vacancy = await context.$content('vacancies', slug).fetch()
+      const vacancy = await context.$content('vacancies', context.i18n.locale, slug).fetch()
       return { vacancy }
     } catch (e) {
       context.error(e) // Show the nuxt error page with the thrown error
