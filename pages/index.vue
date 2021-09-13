@@ -19,7 +19,7 @@
 
         <div class="g-row g-row_wrap">
           <div class="g-col g-col_50 g-col_s-100 services__item">
-            <a href="/portfolio/" class="services-card" :style="styleObject['web']">
+            <NuxtLink to="/portfolio/" class="services-card" :style="styleObject['web']">
               <span class="services-card__content">
                 <span class="services-card__title h3 text-grey">
                   WEB & MOBILE
@@ -36,12 +36,12 @@
                   </span>
                 </span>
               </span>
-            </a><!-- /services-card -->
+            </NuxtLink><!-- /services-card -->
           </div>
 
           <div class="g-col g-col_50 g-col_s-100 services__item">
-            <a
-              href="/portfolio/"
+            <NuxtLink
+              to="/portfolio/"
               class="services-card"
               :style="styleObject['3d']"
             >
@@ -62,12 +62,12 @@
                   </span>
                 </span>
               </span>
-            </a><!-- /services-card -->
+            </NuxtLink><!-- /services-card -->
           </div>
 
           <div class="g-col g-col_50 g-col_s-100 services__item">
-            <a
-              href="/portfolio/"
+            <NuxtLink
+              to="/portfolio/"
               class="services-card"
               :style="styleObject['analysis']"
             >
@@ -87,12 +87,12 @@
                   </span>
                 </span>
               </span>
-            </a><!-- /services-card -->
+            </NuxtLink><!-- /services-card -->
           </div>
 
           <div class="g-col g-col_50 g-col_s-100 services__item">
-            <a
-              href="/portfolio/"
+            <NuxtLink
+              to="/portfolio/"
               class="services-card"
               :style="styleObject['crm']"
             >
@@ -112,7 +112,7 @@
                   </span>
                 </span>
               </span>
-            </a><!-- /services-card -->
+            </NuxtLink><!-- /services-card -->
           </div>
         </div>
       </div>
@@ -2425,6 +2425,7 @@ export default {
         animateTechnologies()
       })
     }
+
     $('.js-accordion-button').on('click', function () {
       const $this = $(this)
       $this.toggleClass('is-active')

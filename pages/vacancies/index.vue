@@ -26,7 +26,7 @@
           </div>
         </div><!-- /page-hero -->
 
-        <Points/>
+        <Points />
 
         <div class="vacancies">
           <div class="vacancies__title">
@@ -68,7 +68,7 @@
               class="g-col g-col_33 g-col_t-50 g-col_s-100 js-sorting-item vacancies-list__item"
               :class="vacancy.projects.concat(vacancy.technologies).join(' ')"
             >
-              <a :href="vacancy.slug" class="vacancy">
+              <NuxtLink :to="vacancy.slug" class="vacancy">
                 <span class="vacancy__arrow">
                   <svg-icon name="sp-arrow-up-right" />
                 </span>
@@ -87,7 +87,7 @@
                     </div>
                   </div>
                 </div>
-              </a><!-- /vacancy -->
+              </NuxtLink><!-- /vacancy -->
             </div>
           </div>
         </div>
@@ -109,20 +109,6 @@
 </template>
 <script>
 export default {
-  head () {
-    return {
-      script: [
-        {
-          src: 'https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js',
-          body: true
-        },
-        {
-          src: 'https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js',
-          body: true
-        }
-      ]
-    }
-  },
   async asyncData ({ $content, error }) {
     const vacancies = await $content('vacancies').fetch().catch(() => {
       error({ statusCode: 404, message: 'Page not found' })
@@ -134,6 +120,100 @@ export default {
     return {
       vacancies, projectsTypes, technologiesTypes
     }
+  },
+  mounted () {
+    function masonryGrid () {
+      const $container = $('.js-sorting')
+      // initialize
+      $container.masonry({
+        itemSelector: '.js-sorting-item',
+        isAnimated: true,
+        columnWidth: '.js-sorting-item'
+      })
+      $container.masonry('reloadItems')
+      $container.masonry('layout')
+    }
+    // фильтрация проектов
+    if ($('.js-sorting').length > 0) {
+      masonryGrid()
+    }
+
+    if ($('.js-sorting').length > 0) {
+      const query = this.$route.query.tag || []
+      const tags = Array.isArray(query) ? query : [query]
+      const selector = tags.map(tag => `.${tag}`).join(',')
+      // eslint-disable-next-line no-undef
+      mixitup('.js-sorting', {
+        selectors: {
+          target: '.js-sorting-item'
+        },
+        load: {
+          filter: selector || 'all'
+        },
+        animation: {
+          enable: false
+        },
+        classNames: {
+          block: '',
+          elementToggle: 'is'
+        },
+        callbacks: {
+          onMixEnd (state) {
+            masonryGrid()
+          }
+        }
+      })
+    }
+
+    function checkActive () {
+      $('.js-sorting-button.is-active').each(function () {
+        const $this = $(this)
+        const params = $this.attr('data-toggle').substr(1)
+        $(`.js-sorting-tag[data-tag="${params}"]`).addClass('is-selected')
+      })
+    }
+
+    checkActive()
+
+    $('.js-sorting-button').on('click', function () {
+      const $this = $(this)
+      const param = $this.attr('data-toggle').substr(1)
+      if ($this.hasClass('is-active')) {
+        $('.js-sorting-tag').removeClass('is-selected')
+        $(`.js-sorting-tag[data-tag="${param}"]`).addClass('is-selected')
+        checkActive()
+        $('.js-sorting-item').removeClass('is-down')
+      } else {
+        $(`.js-sorting-tag[data-tag="${param}"]`).removeClass('is-selected')
+        checkActive()
+        $('.js-sorting-item').removeClass('is-down')
+      }
+      $('.js-sorting').masonry('reloadItems')
+    })
+
+    // показ скрытых блоков в мобильной версии
+    $('.js-project-more').on('click', function () {
+      const $this = $(this)
+      const $buttonText = $this.find('.js-project-more-text')
+      const $projectItem = $this.closest('.js-sorting-item')
+      const $projectInfo = $projectItem.find('.js-project-content')
+      const heightItem = $projectItem.innerHeight()
+      const heightContent = $projectInfo.innerHeight()
+
+      if ($this.hasClass('is-active')) {
+        $this.removeClass('is-active')
+        $buttonText.text('Show information')
+        $projectItem.innerHeight(heightItem - heightContent)
+        $projectInfo.slideUp()
+        masonryGrid()
+      } else {
+        $this.addClass('is-active')
+        $buttonText.text('Close information')
+        $projectItem.innerHeight(heightItem + heightContent)
+        $projectInfo.slideDown()
+        masonryGrid()
+      }
+    })
   }
 }
 </script>

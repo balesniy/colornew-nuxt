@@ -177,20 +177,6 @@ export default {
       projects, projectsTypes, technologiesTypes
     }
   },
-  head () {
-    return {
-      script: [
-        {
-          src: 'https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js',
-          body: true
-        },
-        {
-          src: 'https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js',
-          body: true
-        }
-      ]
-    }
-  },
   mounted () {
     function masonryGrid () {
       const $container = $('.js-sorting')
@@ -209,10 +195,16 @@ export default {
     }
 
     if ($('.js-sorting').length > 0) {
+      const query = this.$route.query.tag || []
+      const tags = Array.isArray(query) ? query : [query]
+      const selector = tags.map(tag => `.${tag}`).join(',')
       // eslint-disable-next-line no-undef
       mixitup('.js-sorting', {
         selectors: {
           target: '.js-sorting-item'
+        },
+        load: {
+          filter: selector || 'all'
         },
         animation: {
           enable: false
@@ -237,14 +229,6 @@ export default {
       })
     }
 
-    const tag = (new URL(window.location)).searchParams.get('tag')
-    if (tag) {
-      const button = $(`.js-sorting-button[data-toggle=".${tag}"]`)
-      const nav = button.closest('.nav')
-      const current = nav.find('.js-sorting-button.is-active')
-      current.removeClass('is-active')
-      button.addClass('is-active')
-    }
     checkActive()
 
     $('.js-sorting-button').on('click', function () {

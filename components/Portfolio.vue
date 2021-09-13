@@ -55,7 +55,7 @@
                     employees:
                   </div>
                   <div class="h4">
-                    <span class="js-animate-number" data-number="15">0</span>
+                    <span class="js-animate-number" :data-number="meta.employees">0</span>
                     <span class="js-animate-text hidden">employees</span>
                   </div>
                 </div>
@@ -99,7 +99,12 @@
 
 <script>
 export default {
-  name: 'Portfolio'
+  name: 'Portfolio',
+  computed: {
+    meta () {
+      return this.$store.state.meta
+    }
+  }
 }
 </script>
 

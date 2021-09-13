@@ -4,7 +4,7 @@
       <div v-for="project in projects" :key="project.title" class="swiper-slide">
         <div class="project">
           <div class="project__image">
-            <img :src="project.img" alt="project">
+            <img :src="getImgSrc(project.img)" alt="project">
           </div>
           <div class="project__content">
             <div class="project-info">
@@ -47,23 +47,23 @@
                 <div class="g-col mobile-hidden">
                   <div class="g-row g-row_middle g-row_between">
                     <div v-for="tag in project.tags" :key="tag" class="g-col">
-                      <a
-                        :href="`/portfolio/?tag=${tag}`"
+                      <NuxtLink
+                        :to="`/portfolio/?tag=${tag.toLowerCase()}`"
                         class="link link_underline-hover text-grey"
                       >
                         <span class="link__text">#{{ tag }}</span>
-                      </a>
+                      </NuxtLink>
                     </div>
                   </div>
                 </div>
 
                 <div class="g-col">
-                  <a href="/portfolio/" class="link link_underline">
+                  <NuxtLink to="/portfolio/" class="link link_underline">
                     <span class="link__text">see more</span>
                     <span class="link__icon">
                       <svg-icon name="sp-chevron-right" />
                     </span>
-                  </a>
+                  </NuxtLink>
                 </div>
               </div>
             </div>
@@ -79,44 +79,41 @@ export default {
   name: 'ProjectsList',
   data () {
     return {
-      projects: [
-        {
-          img: '',
-          title: '',
-          product: '',
-          result: '',
-          description: '',
-          tags: ['web', 'mobile']
-        }
-      ]
+      projects: []
     }
+  },
+  async fetch () {
+    const projects = await this.$content('portfolio').fetch()
+    this.projects = projects.map(project => ({ ...project, tags: [...project.technologies, ...project.projects] }))
   },
   mounted () {
     // слайдер портфолио
-    var swiper = new Swiper('.js-portfolio-slider', {
+    // eslint-disable-next-line no-undef
+    const swiper = new Swiper('.js-portfolio-slider', {
       spaceBetween: 30,
       breakpoints: {
         992: {
           slidesPerView: 'auto',
-          watchSlidesVisibility: true,
-        },
-      },
-    });
+          watchSlidesVisibility: true
+        }
+      }
+    })
 
     swiper.on('slideChange', function () {
-      const i = this.realIndex + 1;
+      const i = this.realIndex + 1
 
-      if (i == 1) {
-        $('.js-portfolio-text').removeClass('is-animate');
+      if (i === 1) {
+        $('.js-portfolio-text').removeClass('is-animate')
+      } else {
+        $('.js-portfolio-text').addClass('is-animate')
       }
-      else {
-        $('.js-portfolio-text').addClass('is-animate');
-      }
-    });
+    })
+  },
+  methods: {
+    getImgSrc (img) {
+      // return ''
+      return require(`~/assets/img/${img}`)
+    }
   }
 }
 </script>
-
-<style scoped>
-
-</style>

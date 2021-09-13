@@ -6,16 +6,16 @@
           <div class="g-row g-row_middle">
             <div class="g-col">
               <div class="header__logo">
-                <a href="/" class="logo">
+                <NuxtLink to="/" class="logo">
                   <img src="~assets/img/logotype.svg" alt="logo">
-                </a>
+                </NuxtLink>
               </div>
             </div>
 
             <div class="g-col mobile-hidden">
-              <!--              <a href="tel:{{ meta.tel }}" class="contact-link link link_underline">-->
-              <!--                <span class="link__text text-nowrap">{{ meta.tel | phone }}</span>-->
-              <!--              </a>-->
+              <a :href="`tel:${meta.tel}`" class="contact-link link link_underline">
+                <span class="link__text text-nowrap">{{ meta.tel }}</span>
+              </a>
             </div>
           </div>
         </div><!-- /g-col -->
@@ -53,7 +53,12 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  computed: {
+    meta () {
+      return this.$store.state.meta
+    }
+  }
 }
 </script>
 

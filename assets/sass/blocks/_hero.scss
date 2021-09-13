@@ -1,6 +1,6 @@
 .hero {
 	min-height: 100vh;
-	background-image: url('../img/hero-bg.png');
+	background-image: url('~assets/img/hero-bg.png');
 	display: flex;
 	align-items: center;
 	padding: 200px 0 150px;
@@ -48,7 +48,7 @@
 			position: absolute;
 			width: 948px;
 			height: 948px;
-			background-image: url('../img/circle.png');
+			background-image: url('~assets/img/circle.png');
 			background-position: 50% 50%;
 			background-size: 100%;
 			z-index: 1;

@@ -5,9 +5,9 @@
         <div class="g-row g-row_middle g-row_between">
           <div class="g-col mobile-hidden">
             <div class="header__logo">
-              <a href="/" class="logo">
+              <NuxtLink to="/" class="logo">
                 <img src="~/assets/img/logotype.svg" alt="logo">
-              </a>
+              </NuxtLink>
             </div>
           </div><!-- /g-col -->
 
@@ -39,15 +39,15 @@
     <div class="main-menu__content">
       <div class="container">
         <ul class="main-menu__list">
-<!--          {% for page in collections.pages %}-->
-<!--          <li class="main-menu__item">-->
-<!--            <a-->
-<!--              href="{{ page.url }}"-->
-<!--              class="main-menu__link-->
-<!--                            {% if currentUrl === page.url %}is-active{% endif %}"-->
-<!--            >{{ page.data.title }}</a>-->
-<!--          </li>-->
-<!--          {%- endfor %}-->
+          <li v-for="page in pages" :key="page.title" class="main-menu__item">
+            <NuxtLink
+              :to="page.url"
+              exact
+              class="main-menu__link"
+            >
+              {{ page.title }}
+            </NuxtLink>
+          </li>
         </ul>
       </div>
     </div><!-- /main-menu__content -->
@@ -61,14 +61,14 @@
             </div>
             <div class="g-row g-row_s-wrap">
               <div class="g-col g-col_s-100">
-                <a href="tel:+79217222583" class="contact-link link link-underline-hover">
-                  <span class="link__text text-nowrap">+7 (921) 722-25-83</span>
+                <a :href="`tel:${meta.tel}`" class="contact-link link link-underline-hover">
+                  <span class="link__text text-nowrap">{{ meta.tel }}</span>
                 </a>
               </div>
 
               <div class="g-col g-col_s-100">
-                <a href="mailto:company@colarnew.ru" class="contact-link link link-underline-hover">
-                  <span class="link__text text-nowrap">company@colarnew.ru</span>
+                <a :href="`mailto:${meta.mailto}`" class="contact-link link link-underline-hover">
+                  <span class="link__text text-nowrap">{{ meta.mailto }}</span>
                 </a>
               </div>
             </div>
@@ -96,7 +96,36 @@
 
 <script>
 export default {
-  name: 'Menu'
+  name: 'Menu',
+  computed: {
+    meta () {
+      return this.$store.state.meta
+    },
+    pages () {
+      return [
+        {
+          title: 'Main',
+          url: '/'
+        },
+        {
+          title: 'Portfolio',
+          url: '/portfolio/'
+        },
+        {
+          title: 'Vacancies',
+          url: '/vacancies/'
+        },
+        {
+          title: 'Pricing',
+          url: '/pricing/'
+        },
+        {
+          title: 'Processes',
+          url: '/processes/'
+        }
+      ]
+    }
+  }
 }
 </script>
 

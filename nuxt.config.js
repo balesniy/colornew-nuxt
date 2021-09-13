@@ -25,7 +25,8 @@ export default {
     ],
     script: [
       {
-        src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js',
+        body: true
       },
       {
         src: 'https://unpkg.com/swiper/swiper-bundle.min.js',
@@ -37,6 +38,14 @@ export default {
       },
       {
         src: 'https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js',
+        body: true
+      },
+      {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js',
+        body: true
+      },
+      {
+        src: 'https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js',
         body: true
       }
     ]
@@ -80,5 +89,8 @@ export default {
 
   svgSprite: {
     elementClass: null
+  },
+  router: {
+    linkActiveClass: 'is-active'
   }
 }

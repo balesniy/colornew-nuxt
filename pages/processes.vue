@@ -364,12 +364,12 @@
         </div>
 
         <div class="text-center">
-          <a href="/pricing/" class="button button_border button_mobile-full">
+          <NuxtLink to="/pricing/" class="button button_border button_mobile-full">
             <span class="button__text">Services</span>
             <span class="button__icon">
               <svg-icon name="sp-arrow-up-small" />
             </span>
-          </a>
+          </NuxtLink>
         </div>
       </div><!-- /container -->
     </div><!-- /section -->
