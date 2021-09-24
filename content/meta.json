@@ -1,7 +1,16 @@
 {
-  "siteName": "Colornew Starter",
-  "siteDescription": "Eleventy starter to kickstart a simple multi-page site",
-  "mailto": "company@colornew.ru",
-  "tel": "+79217222583",
-  "employees": 25
+  "en": {
+    "siteName": "Colornew Starter",
+    "siteDescription": "Eleventy starter to kickstart a simple multi-page site",
+    "mailto": "company@colornew.ru",
+    "tel": "+79217222583",
+    "employees": 15
+  },
+  "ru": {
+    "siteName": "Русское имя сайта",
+    "siteDescription": "Описание",
+    "mailto": "mail@test.com",
+    "tel": "3456-45",
+    "employees": 15
+  }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="main-menu js-menu">
+  <div class="main-menu js-menu" :class="{'is-open': isOpen}">
     <header class="header main-menu__header">
       <div class="container">
         <div class="g-row g-row_middle g-row_between">
@@ -12,23 +12,11 @@
           </div><!-- /g-col -->
 
           <div class="g-col mobile-show">
-            <div class="lang js-dropdown">
-              <div class="lang__top js-dropdown-button">
-                <div class="lang__text">
-                  Eng
-                </div>
-                <div class="lang__icon icon">
-                  <svg-icon name="sp-arrow-down" />
-                </div>
-              </div>
-              <div class="lang__dropdown js-dropdown-block">
-                <a href="#">Rus</a>
-              </div>
-            </div><!-- /lang -->
+            <LangDropdown />
           </div>
 
           <div class="g-col">
-            <div class="header__burger js-menu-close">
+            <div class="header__burger js-menu-close" @click="onClose">
               <svg-icon name="sp-menu-close" />
             </div>
           </div><!-- /g-col -->
@@ -39,7 +27,7 @@
     <div class="main-menu__content">
       <div class="container">
         <ul class="main-menu__list">
-          <li v-for="page in pages" :key="page.title" class="main-menu__item">
+          <li v-for="page in pages" :key="page.title" class="main-menu__item" @click="onClose">
             <NuxtLink
               :to="localePath(page.url)"
               exact
@@ -97,9 +85,12 @@
 <script>
 export default {
   name: 'Menu',
+  props: {
+    isOpen: Boolean
+  },
   computed: {
     meta () {
-      return this.$store.state.meta
+      return this.$store.state.meta[this.$i18n.locale]
     },
     pages () {
       return [
@@ -124,6 +115,11 @@ export default {
           url: '/processes/'
         }
       ]
+    }
+  },
+  methods: {
+    onClose () {
+      this.$emit('close')
     }
   }
 }

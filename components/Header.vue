@@ -1,5 +1,5 @@
 <template>
-  <header class="header header_main js-header">
+  <header v-scroll="handleScroll" class="header header_main js-header" :class="{'is-scroll': isScrolled}">
     <div class="container">
       <div class="g-row g-row_middle g-row_between">
         <div class="g-col">
@@ -23,28 +23,11 @@
         <div class="g-col">
           <div class="g-row g-row_middle">
             <div class="g-col mobile-hidden">
-              <div class="lang js-dropdown">
-                <div class="lang__top js-dropdown-button">
-                  <div class="lang__text">
-                    <nuxt-link :to="switchLocalePath('en')">
-                      Eng
-                    </nuxt-link>
-                  </div>
-                  <div class="lang__icon icon">
-                    <svg-icon name="sp-arrow-down" />
-                  </div>
-                </div>
-
-                <div class="lang__dropdown js-dropdown-block">
-                  <nuxt-link :to="switchLocalePath('ru')">
-                    Rus
-                  </nuxt-link>
-                </div>
-              </div><!-- /lang -->
+              <LangDropdown />
             </div>
 
             <div class="g-col">
-              <div class="header__burger js-menu-open">
+              <div class="header__burger js-menu-open" @click="onOpen">
                 <svg-icon name="sp-menu" />
               </div>
             </div>
@@ -58,9 +41,23 @@
 <script>
 export default {
   name: 'Header',
+  data () {
+    return {
+      isScrolled: false
+    }
+  },
   computed: {
     meta () {
-      return this.$store.state.meta
+      return this.$store.state.meta[this.$i18n.locale]
+    }
+  },
+  methods: {
+    onOpen () {
+      this.$emit('open-menu')
+    },
+    handleScroll (evt, el) {
+      this.isScrolled = window.scrollY > 70
+      // return window.scrollY > 100
     }
   }
 }

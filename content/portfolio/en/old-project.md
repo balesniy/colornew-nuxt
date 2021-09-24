@@ -3,8 +3,8 @@ title: Old project
 product: Web - application
 projects: ['web', 'mobile']
 technologies: ['Apache', 'Laravel']
-img: content/project3.jpg
-logo: content/MadWave.png
+img: project3.jpg
+logo: MadWave.png
 result: Increase in revenue by 100% in 6 months of development.
 ---
 

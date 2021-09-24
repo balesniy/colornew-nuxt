@@ -3,8 +3,8 @@ title: Yacht booking agency SAERADAR
 product: Web - application
 projects: ['web', 'mobile']
 technologies: ['Apache', 'Laravel']
-img: content/project1.jpg
-logo: content/MadWave.png
+img: project1.jpg
+logo: MadWave.png
 result: Increase in revenue by 100% in 6 months of development.
 ---
 

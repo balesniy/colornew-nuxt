@@ -38,7 +38,7 @@ collections:
     fields: # The fields for each document, usually in front matter
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Product", name: "product", widget: "string", default: "Web - application" }
-      - { label: "Result", name: "result", widget: "text" }
+      - { label: "Result", name: "result", widget: "text", i18n: true }
       - { label: "Projects Tags", name: "projects", widget: "list", default: ["development", "management"] }
       - { label: "Technology Tags", name: "technologies", widget: "list", default: ["development", "management"] }
       - { label: "Body", name: "body", widget: "markdown" }
@@ -71,7 +71,7 @@ collections:
         value_field: "items.*.title"
         search_fields: ["items.*.title"]
       - { label: "Technology Tags", name: "technologies", widget: "list", default: [ "development", "management" ] }
-      - { label: "Tasks", name: "tasks", widget: "list", default: [ "development", "learn" ] }
+      - { label: "Tasks", name: "tasks", widget: "list", default: [ "development", "learn" ], i18n: true }
       - label: "Featured Image"
         name: "img"
         widget: "image"
@@ -99,24 +99,18 @@ collections:
       - label: "Projects Types"
         name: "projectsTypes"
         file: "content/projectsTypes.json"
-        i18n: true
         fields:
           - name: items
             widget: list
-            # List widgets only support i18n: true. i18n configuration on sub fields is ignored.
-            i18n: true
             fields:
               - { name: "title", widget: "string" }
               - { name: "toggle", widget: "string" }
       - label: "Technologies List"
         name: "technologiesList"
         file: "content/technologiesList.json"
-        i18n: true
         fields:
           - name: items
             widget: list
-            # List widgets only support i18n: true. i18n configuration on sub fields is ignored.
-            i18n: true
             fields:
               - { name: "title", widget: "string" }
               - { name: "toggle", widget: "string" }

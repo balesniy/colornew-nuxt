@@ -1,6 +1,10 @@
 {
   "items": [
     {
+      "title": "All technologies",
+      "toggle": "all"
+    },
+    {
       "title": "Apache",
       "toggle": ".apache"
     },

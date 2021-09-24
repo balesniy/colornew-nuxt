@@ -18,7 +18,7 @@
       </div><!-- /hero__title -->
 
       <div class="hero__bottom">
-        <a href="#contact-form" class="button button_primary js-scroll-link">Contact us</a>
+        <a href="#contact-form" class="button button_primary js-scroll-link" @click.prevent="scrollTo">Contact us</a>
       </div>
     </div>
     <div class="hero-circle js-hero-circle" />
@@ -28,13 +28,20 @@
 <script>
 export default {
   name: 'Hero',
-  mounted () {  // aнимация картинки hero
+  mounted () { // aнимация картинки hero
     $('.js-hero').on('mousemove', (event) => {
       $('.js-hero-circle').css({
-        'top': `${event.pageY * 1 + 5  }px`,
-        'left': `${event.pageX * 1 + 5  }px`,
-      });
-    });
+        top: `${event.pageY * 1 + 5}px`,
+        left: `${event.pageX * 1 + 5}px`
+      })
+    })
+  },
+  methods: {
+    scrollTo (e) {
+      document.querySelector(e.target.hash).scrollIntoView({
+        behavior: 'smooth'
+      })
+    }
   }
 }
 </script>

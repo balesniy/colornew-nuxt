@@ -17,10 +17,6 @@ export default {
       {
         rel: 'stylesheet',
         href: 'https://unpkg.com/swiper/swiper-bundle.min.css'
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css'
       }
     ],
     script: [
@@ -34,10 +30,6 @@ export default {
       },
       {
         src: 'https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js',
-        body: true
-      },
-      {
-        src: 'https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js',
         body: true
       },
       {
@@ -58,6 +50,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/directives.client.js', // only in client side
+    '~/plugins/vue-masonry.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

@@ -88,7 +88,7 @@
                 <svg-icon name="sp-arrow-next" />
               </div>
             </div>
-            <ProjectsList/>
+            <PortfolioSlider />
           </div>
         </div>
       </div><!-- /g-row -->
@@ -102,7 +102,7 @@ export default {
   name: 'Portfolio',
   computed: {
     meta () {
-      return this.$store.state.meta
+      return this.$store.state.meta[this.$i18n.locale]
     }
   }
 }

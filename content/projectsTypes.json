@@ -1,6 +1,10 @@
 {
   "items": [
     {
+      "title": "All projects",
+      "toggle": "all"
+    },
+    {
       "title": "Web",
       "toggle": ".web"
     },
