@@ -1,5 +1,5 @@
 <template>
-  <form class="form js-validate" name="contact" method="POST" data-netlify="true">
+  <form class="form js-validate" name="contact" method="POST">
     <div class="form__message js-validate-message hidden text-red">
       Thank
     </div>
